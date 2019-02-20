@@ -1,6 +1,8 @@
 package recognize
 
 import (
+	"encoding/base64"
+	"fmt"
 	"io/ioutil"
 	"testing"
 
@@ -23,13 +25,15 @@ func TestToLatex(t *testing.T) {
 	// Load in the image
 	b, err := ioutil.ReadFile("./double_integral_test.jpg")
 	require.NoError(t, err)
+	b64Image := base64.StdEncoding.EncodeToString(b)
+	url := fmt.Sprintf("data:image/jpeg;base64,%s", b64Image)
 
 	mockResp, err := ioutil.ReadFile("./double_integral_test_resp.json")
 	require.NoError(t, err)
 	c := mockClient{}
 	c.On("post", latexEndpoint).Return(mockResp, nil)
 	r := recognizerImpl{c: c}
-	text, err := r.ToLatex(b)
+	text, err := r.ToLatex(url)
 
 	require.NoError(t, err)
 	require.Equal(t, text, "\\int x d x")

@@ -2,7 +2,6 @@ package recognize
 
 import (
 	"bytes"
-	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -16,7 +15,7 @@ const (
 )
 
 type Recognizer interface {
-	ToLatex(image []byte) (string, error)
+	ToLatex(imageURL string) (string, error)
 }
 
 func New() Recognizer {
@@ -94,9 +93,8 @@ type position struct {
 	TopLeftY int `json:"top_left_y"`
 }
 
-func (r recognizerImpl) ToLatex(image []byte) (string, error) {
-	b64Image := base64.StdEncoding.EncodeToString(image)
-	bodyString := fmt.Sprintf("{\"src\": \"data:image/jpeg;base64,%s\"}", b64Image)
+func (r recognizerImpl) ToLatex(imageURL string) (string, error) {
+	bodyString := fmt.Sprintf("{\"src\": \"%s\"}", imageURL)
 	rawJSON, err := r.c.post(latexEndpoint, bodyString)
 	if err != nil {
 		return "", err
