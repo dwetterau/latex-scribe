@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Latex Scribe",
+  "version": "0.1",
+  "description": "Inserts handwriting into text fields while attempting to recognize LaTeX symbols.",
+  "icons": {},
+  "content_scripts": [
+    {
+      "matches": ["*://*.overleaf.com/*"],
+      "js": ["extension.js"]
+    }
+  ]
+}

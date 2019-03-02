@@ -15,11 +15,14 @@ function submitCanvasInput() {
     }).then(res => {
         return res.text();
     }).then(text => {
-        // TODO: Move this somewhere else
+        /*
+        // Note: This code adds the output to the DOM
         let output = document.getElementById("output");
         let div = document.createElement("div");
         div.appendChild(document.createTextNode(text));
         output.appendChild(div);
+        */
+        window.top.postMessage({output: text}, '*');
     });
 }
 
