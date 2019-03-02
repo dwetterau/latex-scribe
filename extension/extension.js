@@ -1,12 +1,11 @@
+let started = false;
+
+function getTextArea() {
+    return input = document.getElementsByClassName("ace_text-input")[0];
+}
 
 function init() {
-    let input = document.getElementsByClassName("ace_text-input");
-    if (!input) {
-        console.error("input not found");
-        return;
-    }
-
-    textArea = input[0];
+    textArea = getTextArea();
     let iframe = document.createElement("iframe");
     iframe.style = "position: absolute;" +
         "left: 50px;" +
@@ -31,7 +30,16 @@ function init() {
             editor.getCursorPosition(),
             e.data.output,
         );
-    })
+    });
+    started = true;
 }
 
-init();
+function reinit() {
+    if (!getTextArea()) {
+        setTimeout(reinit, 100);
+    } else {
+        // Delay for a second after finding the initial window.
+        setTimeout(init, 1000);
+    }
+}
+reinit();
