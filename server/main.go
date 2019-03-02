@@ -15,13 +15,21 @@ import (
 func main() {
 	rec := recognize.New()
 
+	// These are for localhost SSL dev
 	certFile := os.Getenv("cert_file")
 	keyFile := os.Getenv("key_file")
+
+	// Required in prod
+	port := os.Getenv("PORT")
 
 	http.HandleFunc("/", indexHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../static"))))
 	http.HandleFunc("/submit-canvas-input", submitHandler(rec))
-	log.Fatal(http.ListenAndServeTLS(":8080", certFile, keyFile, nil))
+	if len(certFile) > 0 {
+		log.Fatal(http.ListenAndServeTLS(":8080", certFile, keyFile, nil))
+	} else {
+		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+	}
 }
 
 func indexHandler(w http.ResponseWriter, req *http.Request) {

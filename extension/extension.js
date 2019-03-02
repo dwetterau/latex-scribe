@@ -15,8 +15,9 @@ function init() {
         "height: 179px;" +
         "width: 306px;";
 
-    // TODO: Point this at prod!
-    iframe.src = "https://localhost:8080/";
+    // Note: uncomment for development
+    // iframe.src = "https://localhost:8080/";
+    iframe.src = "https://latex.davidw.tech/";
     textArea.parentElement.appendChild(iframe);
 
     window.addEventListener("message", function(e) {
