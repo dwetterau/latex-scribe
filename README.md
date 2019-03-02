@@ -11,8 +11,6 @@ The extension can insert the recognized text into the editor at [Overleaf.com](h
 
 You can find  other versions to install in [this directory of the repo](https://github.com/dwetterau/latex-scribe/tree/master/published).
 
-That's it.
-
 ## How to use it
 1. Follow the steps in the installation sectionr.
 2. Visit [Overleaf.com](https://www.overleaf.com) and begin editing a file.
