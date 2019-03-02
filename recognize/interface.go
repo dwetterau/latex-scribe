@@ -94,7 +94,10 @@ type position struct {
 }
 
 func (r recognizerImpl) ToLatex(imageURL string) (string, error) {
-	bodyString := fmt.Sprintf("{\"src\": \"%s\"}", imageURL)
+	bodyString := fmt.Sprintf("{"+
+		"\"src\": \"%s\","+
+		"\"ocr\": [\"math\", \"text\"]"+
+		"}", imageURL)
 	rawJSON, err := r.c.post(latexEndpoint, bodyString)
 	if err != nil {
 		return "", err
