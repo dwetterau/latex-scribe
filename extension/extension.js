@@ -14,6 +14,8 @@ function init() {
         "background: rgba(0, 0, 0, 0.1);" +
         "height: 179px;" +
         "width: 306px;";
+
+    // TODO: Point this at prod!
     iframe.src = "https://localhost:8080/";
     textArea.parentElement.appendChild(iframe);
 

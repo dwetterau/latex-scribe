@@ -3,7 +3,10 @@
   "name": "Latex Scribe",
   "version": "0.1",
   "description": "Inserts handwriting into text fields while attempting to recognize LaTeX symbols.",
-  "icons": {},
+  "icons": {
+    "48": "icons/48x48.png",
+    "96": "icons/96x96.png"
+  },
   "content_scripts": [
     {
       "matches": ["*://*.overleaf.com/*"],
