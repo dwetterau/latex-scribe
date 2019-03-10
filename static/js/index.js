@@ -90,18 +90,17 @@ function paintAtMouse(e) {
     let x = parseInt(e.clientX - canvas.offsetLeft);
     let y = parseInt(e.clientY - canvas.offsetTop);
 
-    if (lastX == null) {
-        // Just draw a box
-        canvasCtx.fillStyle = currentStyle();
-        canvasCtx.fillRect(
-            x - toolWidth / 2,
-            y - toolWidth / 2,
-            toolWidth,
-            toolWidth,
-            );
-    } else {
+    if (lastX !== null) {
         lineFromLast(e);
     }
+    // Always draw a box
+    canvasCtx.fillStyle = currentStyle();
+    canvasCtx.fillRect(
+        x - toolWidth / 2,
+        y - toolWidth / 2,
+        toolWidth,
+        toolWidth,
+        );
     [lastX, lastY] = [x, y];
 }
 
