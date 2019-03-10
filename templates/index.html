@@ -10,11 +10,29 @@
 <div id="output"></div>
 <div id="input">
     <div id="canvas-container">
-        <canvas id="input-canvas">Your browser must support HTML5 Canvas for this to work.</canvas>
+        <canvas
+                id="input-canvas"
+                width="500"
+                height="150"
+        >Your browser must support HTML5 Canvas for this to work.</canvas>
     </div>
     <div id="controls">
-        <a href="javascript:submitCanvasInput()">Submit</a>
-        <a href="javascript:clearCanvasInput()">Clear</a>
+        <div class="left-controls">
+            <a href="javascript:clearCanvasInput()">Clear</a>
+        </div>
+        <div class="right-controls">
+            <div id="width-slider-container">
+                <input
+                        id="width-slider"
+                        type="range"
+                        min="1" max="50" value="2">
+            </div>
+            <select id="tool-select">
+                <option value="pen">Pen</option>
+                <option value="eraser">Eraser</option>
+            </select>
+            <a href="javascript:submitCanvasInput()">Submit</a>
+        </div>
     </div>
 </div>
 </body>

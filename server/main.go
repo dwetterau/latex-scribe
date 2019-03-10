@@ -25,6 +25,7 @@ func main() {
 	http.HandleFunc("/", indexHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../static"))))
 	http.HandleFunc("/submit-canvas-input", submitHandler(rec))
+	fmt.Println("Listening..")
 	if len(certFile) > 0 {
 		log.Fatal(http.ListenAndServeTLS(":8080", certFile, keyFile, nil))
 	} else {
@@ -75,7 +76,7 @@ func submitHandler(recognizer recognize.Recognizer) func(w http.ResponseWriter, 
 			return
 		}
 
-		fmt.Println("Recognized: ", latex)
+		fmt.Println("Recognized:", latex)
 		w.WriteHeader(200)
 		w.Write([]byte(latex))
 	}

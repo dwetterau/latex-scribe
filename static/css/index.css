@@ -16,3 +16,12 @@ canvas#input-canvas {
     min-width: 300px;
     border: solid 1px black;
 }
+
+div#controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+div#controls div.right-controls {
+    display: flex;
+}

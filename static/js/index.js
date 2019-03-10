@@ -5,6 +5,10 @@ let canvasHeight = 0;
 let canvasWidth = 0;
 let drawing = false;
 
+// Variables controlled by the UI
+let toolWidth = 2;
+let currentTool = "pen";
+
 function submitCanvasInput() {
     fetch("/submit-canvas-input", {
         method: "POST",
@@ -32,6 +36,14 @@ function clearCanvasInput() {
     canvasCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 }
 
+function changeWidth(e) {
+    toolWidth = e.target.value;
+}
+
+function changeTool(e) {
+    currentTool = e.target.value;
+}
+
 function initCanvas() {
     canvas = document.getElementById("input-canvas");
     canvasCtx = canvas.getContext('2d');
@@ -47,6 +59,9 @@ function initCanvas() {
     canvas.addEventListener("mouseup", endDraw);
     canvas.addEventListener("mouseout", endDraw);
 
+    document.getElementById("width-slider").addEventListener("change", changeWidth);
+    document.getElementById("tool-select").addEventListener("change", changeTool);
+
     // TODO: Also need a resize I think
 }
 
@@ -56,6 +71,16 @@ function startDraw(e) {
 }
 
 let lastX, lastY = [null, null];
+
+function currentStyle() {
+    if (currentTool === "pen") {
+        return "#000"
+    }
+    if (currentTool === "eraser") {
+        return "#FFF"
+    }
+    throw Error("unknown tool type: " + currentTool);
+}
 
 function paintAtMouse(e) {
     if (!drawing) {
@@ -67,8 +92,13 @@ function paintAtMouse(e) {
 
     if (lastX == null) {
         // Just draw a box
-        canvasCtx.fillStyle = "#000";
-        canvasCtx.fillRect(x - 1, y - 1, 2, 2);
+        canvasCtx.fillStyle = currentStyle();
+        canvasCtx.fillRect(
+            x - toolWidth / 2,
+            y - toolWidth / 2,
+            toolWidth,
+            toolWidth,
+            );
     } else {
         lineFromLast(e);
     }
@@ -86,12 +116,12 @@ function endDraw(e) {
 }
 
 function lineFromLast(e) {
-    canvasCtx.strokeStyle = "#000";
+    canvasCtx.strokeStyle = currentStyle();
     let x = parseInt(e.clientX - canvas.offsetLeft);
     let y = parseInt(e.clientY - canvas.offsetTop);
 
     canvasCtx.beginPath();
-    canvasCtx.lineWidth = 2;
+    canvasCtx.lineWidth = toolWidth;
     canvasCtx.moveTo(lastX, lastY);
     canvasCtx.lineTo(x, y);
     canvasCtx.stroke();
