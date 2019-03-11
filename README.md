@@ -9,6 +9,8 @@ The extension can insert the recognized text into the editor at [Overleaf.com](h
 - When the download modal pops up, select "Open With" Firefox
 - Firefox will then ask if you want to add the extension
 
+Note: On Mac, you will need to "Save File" first, then open it manually. When opening the file, you'll need to choose the Firefox application. You may have to click "Options" and then select "Enable: All Applications" in order to be able to do this.
+
 You can find  other versions to install in [this directory of the repo](https://github.com/dwetterau/latex-scribe/tree/master/published).
 
 ## How to use it
