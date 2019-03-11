@@ -5,7 +5,7 @@ The extension can insert the recognized text into the editor at [Overleaf.com](h
 
 ## Installation
 
-- [Click here to install the browser extension](https://github.com/dwetterau/latex-scribe/raw/master/published/latex_scribe-0.2-fx.xpi). 
+- [Click here to install the browser extension](https://github.com/dwetterau/latex-scribe/raw/master/published/latex_scribe-0.3-fx.xpi). 
 - When the download modal pops up, select "Open With" Firefox
 - Firefox will then ask if you want to add the extension
 
